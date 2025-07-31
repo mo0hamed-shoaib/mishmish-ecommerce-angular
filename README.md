@@ -1,9 +1,9 @@
-# AngularFlowbite
+# MishMish
 
 <div align="center">
   <img src="./public/images/logo-no-bg.png" alt="AngularFlowbite Logo" width="200" height="200">
   
-  <h3>Modern E-commerce Platform</h3>
+  <h3>MishMish, A Modern E-commerce Platform</h3>
   <p>A powerful, responsive e-commerce web application built with Angular 19 and Flowbite UI</p>
 
   [![Angular](https://img.shields.io/badge/Angular-19.2.0-red?logo=angular)](https://angular.io/)
