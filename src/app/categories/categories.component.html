@@ -1,0 +1,148 @@
+<!-- Loading State -->
+@if (loading) {
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+    <div class="text-center">
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <p class="mt-4 text-gray-600 dark:text-gray-300">Loading categories...</p>
+    </div>
+</div>
+}
+
+<!-- Error State -->
+@if (error) {
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+    <div class="text-center max-w-md">
+        <h3 class="text-lg font-medium text-red-600 mb-2">Error Loading Categories</h3>
+        <button (click)="loadCategories()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
+            Try Again
+        </button>
+    </div>
+</div>
+}
+
+<!-- Categories Content -->
+@if (!loading && !error) {
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4">
+    <div class="max-w-7xl mx-auto">
+
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Shop by Category
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300">
+                Browse our curated collection of products
+            </p>
+        </div>
+
+        <!-- Categories List -->
+        @if (filteredCategories.length > 0) {
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            @for (category of filteredCategories; track category.id) {
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:scale-105"
+                [routerLink]="['/products']" [queryParams]="{category: category.id}">
+
+                <!-- Category Icon -->
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center shadow-lg" [class]="category.name.toLowerCase().includes('clothes') || category.name.toLowerCase().includes('clothing') ? 'bg-purple-600' : 
+                             category.name.toLowerCase().includes('electronics') || category.name.toLowerCase().includes('electronic') ? 'bg-blue-600' :
+                             category.name.toLowerCase().includes('furniture') ? 'bg-green-600' :
+                             category.name.toLowerCase().includes('shoes') || category.name.toLowerCase().includes('footwear') ? 'bg-red-600' :
+                             category.name.toLowerCase().includes('miscellaneous') || category.name.toLowerCase().includes('misc') ? 'bg-gray-600' :
+                             category.name.toLowerCase().includes('jewelry') || category.name.toLowerCase().includes('accessories') ? 'bg-yellow-600' :
+                             category.name.toLowerCase().includes('books') || category.name.toLowerCase().includes('stationery') ? 'bg-indigo-600' :
+                             'bg-blue-600'">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        @if (category.name.toLowerCase().includes('clothes') ||
+                        category.name.toLowerCase().includes('clothing')) {
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 4l6 2v5h-3v8a1 1 0 0 1 -1 1h-10a1 1 0 0 1 -1 -1v-8h-3v-5l6 -2a3 3 0 0 0 6 0 M10.5 11h2.5l-1.5 5">
+                        </path>
+                        } @else if (category.name.toLowerCase().includes('electronics') ||
+                        category.name.toLowerCase().includes('electronic')) {
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z">
+                        </path>
+                        } @else if (category.name.toLowerCase().includes('furniture')) {
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 11a2 2 0 0 1 2 2v1h12v-1a2 2 0 1 1 4 0v5a1 1 0 0 1 -1 1h-18a1 1 0 0 1 -1 -1v-5a2 2 0 0 1 2 -2z M4 11v-3a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v3 M12 5v9">
+                        </path>
+                        } @else if (category.name.toLowerCase().includes('shoes') ||
+                        category.name.toLowerCase().includes('footwear')) {
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h5.426a1 1 0 0 1 .863 .496l1.064 1.823a3 3 0 0 0 1.896 1.407l4.677 1.114a4 4 0 0 1 3.074 3.89v2.27a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-10a1 1 0 0 1 1 -1z M14 13l1 -2 M8 18v-1a4 4 0 0 0 -4 -4h-1 M10 12l1.5 -3">
+                        </path>
+                        } @else if (category.name.toLowerCase().includes('miscellaneous') ||
+                        category.name.toLowerCase().includes('misc')) {
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 4V2a1 1 0 011-1h4a1 1 0 011 1v2m4 0V2a1 1 0 011-1h1a1 1 0 011 1v2m-7 3H9m6 0h-2m-4 7h4m-4 4h4m-8-4h.01M9 16h.01M3 20h18a2 2 0 002-2V6a2 2 0 00-2-2H3a2 2 0 00-2 2v12a2 2 0 002 2z">
+                        </path>
+                        } @else if (category.name.toLowerCase().includes('jewelry') ||
+                        category.name.toLowerCase().includes('accessories')) {
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+                        </path>
+                        } @else if (category.name.toLowerCase().includes('books') ||
+                        category.name.toLowerCase().includes('stationery')) {
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                        </path>
+                        } @else {
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                        </path>
+                        }
+                    </svg>
+                </div>
+
+                <!-- Category Name -->
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white text-center mb-4">
+                    {{ category.name }}
+                </h3>
+
+                <!-- Explore Button -->
+                <div class="text-center">
+                    <span class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                        Explore products
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            }
+        </div>
+        }
+
+        <!-- Empty State -->
+        @if (filteredCategories.length === 0) {
+        <div class="text-center py-12">
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">No Categories Found</h3>
+            <p class="text-gray-600 dark:text-gray-300">No categories are available at the moment.</p>
+        </div>
+        }
+
+        <!-- Call to Action -->
+        @if (filteredCategories.length > 0) {
+        <div class="text-center mt-12">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 p-8">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                    Browse All Products
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                    Can't find what you're looking for? Explore our complete product catalog.
+                </p>
+                <a routerLink="/products"
+                    class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    View All Products
+                </a>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+}

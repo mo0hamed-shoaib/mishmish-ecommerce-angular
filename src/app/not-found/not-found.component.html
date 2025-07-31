@@ -1,0 +1,26 @@
+<div class="flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-4 flex-1 min-h-screen">
+    <div class="text-center max-w-lg mx-auto">
+        <h1
+            class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 md:mb-8">
+            404
+        </h1>
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
+            Oops! Page Not Found
+        </h2>
+        <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 mb-6 sm:mb-8">
+            The page you're looking for doesn't exist or has been moved.
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <a routerLink="/home"
+                class="px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 text-white font-medium rounded-lg transition-colors duration-200 inline-flex items-center justify-center text-sm cursor-pointer">
+                Go Back Home
+            </a>
+            <button (click)="goBack()"
+                class="px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 border border-gray-300 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 text-gray-700 font-medium rounded-lg transition-colors duration-200 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-600 inline-flex items-center justify-center text-sm cursor-pointer">
+                Previous Page
+            </button>
+        </div>
+    </div>
+</div>

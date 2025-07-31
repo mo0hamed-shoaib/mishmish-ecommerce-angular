@@ -1,0 +1,73 @@
+<div class="bg-gray-50 dark:bg-gray-900 p-5">
+    <!-- Loading State -->
+    @if (loading) {
+    <div class="flex items-center justify-center py-20">
+        <div class="text-center">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            <p class="mt-4 text-gray-600 dark:text-gray-300">Loading products...</p>
+        </div>
+    </div>
+    } @else {
+    <!-- Header -->
+    <div class="text-center mb-8">
+        @if (selectedCategoryId) {
+        <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-2">
+            Category Products
+        </h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300">
+            Showing {{ filteredProducts.length }} products in this category
+        </p>
+        } @else {
+        <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-2">
+            Explore our Products
+        </h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300">
+            Discover our complete collection of {{ filteredProducts.length }} products
+        </p>
+        }
+    </div>
+
+    <!-- Products Grid -->
+    <div class="container mx-auto px-4 py-6 pb-36 md:pb-24">
+        <div class="flex flex-wrap justify-center gap-4">
+            @for(product of filteredProducts | slice:0:16; track product.id) {
+            <app-product [product]="product" (sendMessage)="displayMessage($event)"
+                [title]="productTitle"></app-product>
+            } @empty {
+            <div class="text-center py-12">
+                <div class="mb-4">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                    @if (selectedCategoryId) {
+                    No products found in this category
+                    } @else {
+                    No products available
+                    }
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                    @if (selectedCategoryId) {
+                    Try browsing other categories or check back later.
+                    } @else {
+                    Please check back later for new products.
+                    }
+                </p>
+                @if (selectedCategoryId) {
+                <a routerLink="/products"
+                    class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg text-sm transition-colors duration-200">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    View All Products
+                </a>
+                }
+            </div>
+            }
+        </div>
+    </div>
+    }
+</div>
